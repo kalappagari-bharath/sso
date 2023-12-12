@@ -1,0 +1,49 @@
+<table>
+  <tr>
+    <td>
+      <a routerLink="public-page">[PUBLIC-PAGE]</a>
+    </td>
+    <td>
+      <a routerLink="restricted-page" *ngIf="isLoggedIn()">[RESTRICTED-PAGE]</a>
+    </td>
+    <td>
+      <button
+        mat-raised-button
+        color="warn"
+        (click)="login()"
+        *ngIf="!isLoggedIn()"
+        >SIGN IN</button>
+    </td>
+    <td>
+      <button
+        mat-raised-button
+        color="warn"
+        (click)="logout()"
+        *ngIf="isLoggedIn()"
+        >SIGN OUT</button>
+    </td>
+  </tr>
+</table>
+
+<div *ngIf="isLoggedIn()">
+  <h3>You are logged in.</h3>
+  <p>Welcome {{getName()}}!</p>
+</div>
+
+<div *ngIf="!isLoggedIn()">
+  <h3>You are NOT logged in.</h3>
+</div>
+
+<table *ngIf="isLoggedIn()">
+  <tr>
+    <td>
+      <button (click)="callProfile()">
+        GET PROFILE
+      </button>
+    </td>
+  </tr>
+  <tr>
+    API Response: {{apiResponse}}
+  </tr>
+</table>
+<router-outlet></router-outlet>
